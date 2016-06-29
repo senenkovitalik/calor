@@ -48,6 +48,11 @@
 
 		<!-- Add PHP code here -->
 		<!-- Read products from DB -->
+		<?php
+		require_once 'db.php';
+		$db = new DB();
+		$db->readAllProducts(); 
+		?>
 
 		<tr>
 			<td>

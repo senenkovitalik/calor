@@ -1,31 +1,32 @@
 function addProd(button) {
 
-  var cell, name, cal, protein, fat, vugli, data;
+  var cell, name, cal, protein, fat, vugli, data, str;
 
   cell = button.parentNode.parentNode.cells;
 
-  name    = cell[0].childNodes[0].value;
-  cal     = cell[1].childNodes[0].value;
-  protein = cell[2].childNodes[0].value;
-  fat     = cell[3].childNodes[0].value;
-  vugli   = cell[4].childNodes[0].value;
+  name            = cell[0].childNodes[0].value;
+  calories        = cell[1].childNodes[0].value;
+  proteins        = cell[2].childNodes[0].value;
+  fats            = cell[3].childNodes[0].value;
+  carbohydrates   = cell[4].childNodes[0].value;
 
   data = {
   	'name' : name,
-  	'call' : cal,
-  	'protein' : protein,
-  	'fat' : fat,
-  	'vugli' : vugli
+  	'calories' : calories,
+  	'proteins' : proteins,
+  	'fats' : fats,
+  	'carbohydrates' : carbohydrates
   };
 
-  console.log( JSON.stringify(data) );
+  str = JSON.stringify(data);
   
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
   	  // response
+      console.log(xhttp.responseText);
     }
   };
-  xhttp.open("GET", window.location.protocol +"//serverside.php", true);
-  xhttp.send( data );
+  xhttp.open("GET", "serverside.php?q=" + str, true);
+  xhttp.send();
 }
