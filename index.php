@@ -93,15 +93,6 @@
 			<th>Жири, г</th>
 			<th>Вуглеводи, г</th>
 		</tr>
-
-		<tr>
-			<td>Сумарно</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></th>
-		</tr>
 	</table>
 </div>
 

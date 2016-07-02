@@ -31,6 +31,8 @@ function addProd(button) {
   xhttp.send();
 }
 
+// calculate each product per 100g
+// and total calculation 
 function calculate() {
   var table = document.getElementById("products");
   var rows = table.rows;
@@ -48,16 +50,17 @@ function calculate() {
 
     if (checkbox.checked) {
       name          = row.cells[1].innerText;
-      weight        = row.cells[2].getElementsByTagName("input")[0].value/100;
+      weight        = parseInt(row.cells[2].getElementsByTagName("input")[0].value);
       calories      = parseInt(row.cells[3].innerText);
       proteins      = parseFloat(row.cells[4].innerText);
       fats          = parseFloat(row.cells[5].innerText);
       carbohydrates = parseFloat(row.cells[6].innerText);
 
       // calculated
-      proteins      = proteins*weight;
-      fats          = fats*weight;
-      carbohydrates = carbohydrates*weight;
+      calories      *= weight/100; 
+      proteins      *= weight/100;
+      fats          *= weight/100;
+      carbohydrates *= weight/100;
 
       // total calculated
       total_weight        += weight;
@@ -66,16 +69,50 @@ function calculate() {
       total_fats          += fats;
       total_carbohydrates += carbohydrates;
 
+
       var data = [name, weight, calories, proteins, fats, carbohydrates];
 
+      // insert row to calc-table
       addRow(data);
     }
   }
-  var data = ["Total", total_weight, total_calories, total_proteins, total_fats, total_carbohydrates];
+
+  var data = ["Сумарно", total_weight, total_calories, total_proteins, total_fats, total_carbohydrates];
+
+  // insert row with total values
   addRow(data);
 }
 
-// function addRow(data) {
-//   var table = getElementById("calc-table");
-//   var rows = table.rows;
-// }
+// insert new row as last row to calc-table
+function addRow(data) {
+  var table, row, cell_name, cell_weight, cell_calories, cell_protein, 
+      cell_fats, cell_carbohydrates;
+  
+  table = document.getElementById("calc-table");
+  
+  row = table.insertRow(-1);
+
+  // name
+  cell_name = row.insertCell(0);
+  cell_name.innerHTML = data[0];
+
+  // weight
+  cell_weight = row.insertCell(1);
+  cell_weight.innerHTML = data[1];
+
+  // calories
+  cell_calories = row.insertCell(2);
+  cell_calories.innerHTML = data[2].toFixed(2);
+
+  // protein
+  cell_protein = row.insertCell(3);
+  cell_protein.innerHTML = data[3].toFixed(2);
+  
+  // fats
+  cell_fats = row.insertCell(4);
+  cell_fats.innerHTML = data[4].toFixed(2);
+
+  // carbohydrates
+  cell_carbohydrates = row.insertCell(5);
+  cell_carbohydrates.innerHTML = data[5].toFixed(2);
+}
