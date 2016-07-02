@@ -71,19 +71,9 @@
 				</tr>";
 		    }
 		?>
-
 		<tr>
-			<td>
-				<input type="checkbox"> Кукурудза</td>
-			<td>
-				<input type="number">
-			</td>
-			<td>54</td>
-			<td>1,2</td>
-			<td>0,5</td>
-			<td>40,0</td>
-			<td>
-				<input type="button" value="Remove from DB">
+			<td id="calc-td" colspan="7">
+			    <input type="button" value="Calculate" onclick="calculate(this);">
 			</td>
 		</tr>
 	</table>

@@ -35,3 +35,7 @@ th {
 input[type="number"] {
 	width: 70px;
 }
+
+#calc-td {
+    text-align: center;
+}

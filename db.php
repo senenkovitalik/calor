@@ -49,9 +49,12 @@ class DB
         if($conn !== null)
         {
             $sql = "SELECT * FROM products";
+            $stat = $conn->query($sql);
 
-            return $conn->query($sql);
+            $conn = null;
         }
+
+        return $stat;
     }
 
     public function deleteProduct()

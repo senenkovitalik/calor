@@ -30,3 +30,7 @@ function addProd(button) {
   xhttp.open("GET", "serverside.php?q=" + str, true);
   xhttp.send();
 }
+
+function calculate() {
+  
+}
