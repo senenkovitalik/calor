@@ -48,6 +48,29 @@
 
 		<!-- Add PHP code here -->
 		<!-- Read products from DB -->
+		<?php
+		    require_once "db.php";
+		    $db = new DB();
+		    $prod_arr = $db->readAllProducts();
+
+		    foreach ($prod_arr as $row) {
+		    	echo 
+			    "<tr>
+					<td>
+						<input type=\"checkbox\">{$row['name']}</td>
+					<td>
+						<input type=\"number\">
+					</td>
+					<td>{$row['calories']}</td>
+					<td>{$row['proteins']}</td>
+					<td>{$row['fats']}</td>
+					<td>{$row['carbohydrates']}</td>
+					<td>
+						<input type=\"button\" value=\"Remove from DB\">
+					</td>
+				</tr>";
+		    }
+		?>
 
 		<tr>
 			<td>

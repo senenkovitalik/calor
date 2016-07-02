@@ -14,7 +14,7 @@ class DB
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             return $conn;
-            
+
 		} catch(PDOException $e) {
 
             return null;
@@ -44,7 +44,14 @@ class DB
 
     public function readAllProducts()
     {
-        echo "";
+        $conn = $this->connectToDB();
+
+        if($conn !== null)
+        {
+            $sql = "SELECT * FROM products";
+
+            return $conn->query($sql);
+        }
     }
 
     public function deleteProduct()
