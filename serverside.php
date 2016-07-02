@@ -7,6 +7,9 @@
   	$fats 			= $product->fats;
   	$carbohydrates  = $product->carbohydrates;
 	
+	require_once "db.php";
+
 	$db = new DB();
-	$db->saveProduct($name, $calories, $proteins, $fats, $carbohydrates);
+	
+	echo $db->saveProduct($name, $calories, $proteins, $fats, $carbohydrates);
 ?>
