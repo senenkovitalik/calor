@@ -47,7 +47,6 @@
 			<th></th>
 		</tr>
 
-		<!-- Add PHP code here -->
 		<!-- Read products from DB -->
 		<?php
 		    require_once "db.php";
@@ -69,7 +68,7 @@
 					<td>{$row['fats']}</td>
 					<td>{$row['carbohydrates']}</td>
 					<td>
-						<input type=\"button\" value=\"Remove from DB\">
+						<input type=\"button\" value=\"Remove from DB\" onclick=\"removeProd(this);\">
 					</td>
 				</tr>";
 		    }

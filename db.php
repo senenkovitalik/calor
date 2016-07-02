@@ -57,9 +57,18 @@ class DB
         return $stat;
     }
 
-    public function deleteProduct()
+    public function remove_product( $name )
     {
+        $conn = $this->connectToDB();
 
+        if ( $conn !== null ) {
+            $sql = "DELETE FROM products WHERE name='$name'";
+            $stat = $conn->exec($sql);
+
+            $conn = null;
+        }
+
+        return $stat;
     }
 }
 

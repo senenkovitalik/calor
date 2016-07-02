@@ -11,6 +11,7 @@ function addProd(button) {
   carbohydrates   = cell[4].childNodes[0].value;
 
   data = {
+    'action': 'save',
   	'name' : name,
   	'calories' : calories,
   	'proteins' : proteins,
@@ -24,6 +25,25 @@ function addProd(button) {
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
   	  // response
+      console.log(xhttp.responseText);
+    }
+  };
+  xhttp.open("GET", "serverside.php?q=" + str, true);
+  xhttp.send();
+}
+
+function removeProd(button) {
+  var name;
+
+  name = button.parentNode.parentNode.cells[1].innerText;
+
+  console.log(name);
+
+  str = JSON.stringify( {'action':'remove', 'name':name} );
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
       console.log(xhttp.responseText);
     }
   };
