@@ -35,8 +35,9 @@
 
 <div id="add_products_to_menu">
 	<p>Додайти продукти в своє денне меню</p>
-	<table>
+	<table id="products">
 		<tr>
+		    <th></th>
 			<th>Назва</th>
 			<th>Вага, г</th>
 			<th>Калорійність, ккал</th>
@@ -57,7 +58,9 @@
 		    	echo 
 			    "<tr>
 					<td>
-						<input type=\"checkbox\">{$row['name']}</td>
+						<input type=\"checkbox\">
+					</td>
+					<td>{$row['name']}</td>
 					<td>
 						<input type=\"number\">
 					</td>
@@ -72,7 +75,7 @@
 		    }
 		?>
 		<tr>
-			<td id="calc-td" colspan="7">
+			<td id="calc-td" colspan="8">
 			    <input type="button" value="Calculate" onclick="calculate(this);">
 			</td>
 		</tr>
@@ -81,7 +84,7 @@
 
 <div id="calculation">
 	<p>За сьогодні я з'їв</p>
-	<table>
+	<table id="calc-table">
 		<tr>
 			<th>Назва</th>
 			<th>Вага, г</th>
@@ -90,8 +93,6 @@
 			<th>Жири, г</th>
 			<th>Вуглеводи, г</th>
 		</tr>
-
-		<!-- Add JS code here -->
 
 		<tr>
 			<td>Сумарно</td>
