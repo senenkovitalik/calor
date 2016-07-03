@@ -92,7 +92,6 @@ function calculate() {
       total_fats          += fats;
       total_carbohydrates += carbohydrates;
 
-
       var data = [name, weight, calories, proteins, fats, carbohydrates];
 
       // insert row to calc-table
@@ -100,7 +99,25 @@ function calculate() {
     }
   }
 
-  var data = ["Сумарно", total_weight, total_calories, total_proteins, total_fats, total_carbohydrates];
+  //  %
+  var sum = total_proteins + total_fats + total_carbohydrates;
+  var percent = 100/sum;
+
+  var percent_proteins = total_proteins * percent;
+  var percent_fats = total_fats * percent;
+  var percent_carbohydrates = total_carbohydrates * percent;
+
+  var data = [
+    "Сумарно", 
+    total_weight, 
+    total_calories, 
+    total_proteins, 
+    total_fats, 
+    total_carbohydrates,
+    percent_proteins, 
+    percent_fats, 
+    percent_carbohydrates
+  ];
 
   // insert row with total values
   addRow(data);
@@ -129,15 +146,28 @@ function addRow(data) {
 
   // protein
   cell_protein = row.insertCell(3);
-  cell_protein.innerHTML = data[3].toFixed(2);
+  if (data[6] !== undefined) {
+    cell_protein.innerHTML = data[3].toFixed(2) + " ( " + data[6].toFixed(2) + "% )";
+  } else {
+    cell_protein.innerHTML = data[3].toFixed(2);
+  }
   
   // fats
   cell_fats = row.insertCell(4);
-  cell_fats.innerHTML = data[4].toFixed(2);
+  if (data[7] !== undefined) {
+    cell_fats.innerHTML = data[4].toFixed(2) + " ( " + data[7].toFixed(2) + "% )";
+  } else {
+    cell_fats.innerHTML = data[4].toFixed(2);
+  }
+  
 
   // carbohydrates
   cell_carbohydrates = row.insertCell(5);
-  cell_carbohydrates.innerHTML = data[5].toFixed(2);
+  if (data[8] !== undefined) {
+    cell_carbohydrates.innerHTML = data[5].toFixed(2) + " ( " + data[8].toFixed(2) + "% ) ";
+  } else {
+    cell_carbohydrates.innerHTML = data[5].toFixed(2);
+  }
 }
 
 // dynamicaly add new product to products table
