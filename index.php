@@ -10,7 +10,7 @@
 
 <div id="add_new_products">
 	<p>Додайте продукти в БД або <a href="#add_products_to_menu">виберіть</a> з існуючих</p>
-	<table>
+	<table id="add-table">
 		<tr>
 			<th>Назва</th>
 			<th>Калорійність, ккал</th>

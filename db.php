@@ -35,10 +35,10 @@ class DB
             $conn = null;
         }
 
-        if($status !== 0) {
-            return "Product saved succesfuly";
+        if ( $status !== 0 ) {
+            return true;    // Saved succesfuly
         } else {
-            return "Product not saved";
+            return false;   // Some problems
         }
     }
 
@@ -57,8 +57,8 @@ class DB
         return $stat;
     }
 
-    public function remove_product( $name )
-    {
+    public function remove_product( $name ) {
+        
         $conn = $this->connectToDB();
 
         if ( $conn !== null ) {
@@ -68,7 +68,11 @@ class DB
             $conn = null;
         }
 
-        return $stat;
+        if ( $status !== 0 ) {
+            return true;    // Removed succesfuly
+        } else {
+            return false;   // Some problems
+        }
     }
 }
 

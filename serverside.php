@@ -21,7 +21,7 @@
 	  	$carbohydrates  = $product->carbohydrates;	
 
 	  	global $db;
-	  	echo $db->saveProduct($name, $calories, $proteins, $fats, $carbohydrates);
+	  	echo $db->saveProduct( $name, $calories, $proteins, $fats, $carbohydrates );
     }
     
 	function remove_prod( $product ) {

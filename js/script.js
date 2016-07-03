@@ -1,14 +1,14 @@
 function addProd(button) {
 
-  var cell, name, cal, protein, fat, vugli, data, str;
+  var table, cells, name, calories, proteins, fats, carbohydrates, data, str;
 
-  cell = button.parentNode.parentNode.cells;
+  cells = button.parentNode.parentNode.cells;
 
-  name            = cell[0].childNodes[0].value;
-  calories        = cell[1].childNodes[0].value;
-  proteins        = cell[2].childNodes[0].value;
-  fats            = cell[3].childNodes[0].value;
-  carbohydrates   = cell[4].childNodes[0].value;
+  name            = cells[0].childNodes[0].value;
+  calories        = cells[1].childNodes[0].value;
+  proteins        = cells[2].childNodes[0].value;
+  fats            = cells[3].childNodes[0].value;
+  carbohydrates   = cells[4].childNodes[0].value;
 
   data = {
     'action': 'save',
@@ -25,7 +25,10 @@ function addProd(button) {
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
   	  // response
-      console.log(xhttp.responseText);
+      if (xhttp.responseText) {
+        // insert new row
+        addRowAJAX(data);
+      }
     }
   };
   xhttp.open("GET", "serverside.php?q=" + str, true);
@@ -33,13 +36,10 @@ function addProd(button) {
 }
 
 function removeProd(button) {
-  var name;
 
-  name = button.parentNode.parentNode.cells[1].innerText;
+  var name = button.parentNode.parentNode.cells[1].innerText;
 
-  console.log(name);
-
-  str = JSON.stringify( {'action':'remove', 'name':name} );
+  var str = JSON.stringify( {'action':'remove', 'name':name} );
 
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -135,4 +135,28 @@ function addRow(data) {
   // carbohydrates
   cell_carbohydrates = row.insertCell(5);
   cell_carbohydrates.innerHTML = data[5].toFixed(2);
+}
+
+function addRowAJAX(data) {
+  var table = document.getElementById("products");
+
+  var row = table.insertRow( table.getElementsByTagName("tr").length - 1 );
+
+  var cell_ch            = row.insertCell(0);
+  var cell_name          = row.insertCell(1);
+  var cell_weight        = row.insertCell(2);
+  var cell_calories      = row.insertCell(3);
+  var cell_proteins      = row.insertCell(4);
+  var cell_fats          = row.insertCell(5);
+  var cell_carbohydrates = row.insertCell(6);
+  var cell_remove        = row.insertCell(7);
+
+  cell_ch.innerHTML = "<input type='checkbox'>";
+  cell_name.innerHTML = data.name;
+  cell_weight.innerHTML = "<input type='number'>";
+  cell_calories.innerHTML = data.calories;
+  cell_proteins.innerHTML = data.proteins;
+  cell_fats.innerHTML = data.fats;
+  cell_carbohydrates.innerHTML = data.carbohydrates;
+  cell_remove.innerHTML = "<input type='button' value='Remove from DB' onclick='removeProd(this)'";
 }
