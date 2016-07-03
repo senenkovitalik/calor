@@ -44,7 +44,10 @@ function removeProd(button) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
-      console.log(xhttp.responseText);
+      if (xhttp.responseText) {
+        var row = button.parentNode.parentNode;
+        removeRowAJAX(row);
+      }
     }
   };
   xhttp.open("GET", "serverside.php?q=" + str, true);
@@ -137,9 +140,12 @@ function addRow(data) {
   cell_carbohydrates.innerHTML = data[5].toFixed(2);
 }
 
+// dynamicaly add new product to products table
 function addRowAJAX(data) {
+
   var table = document.getElementById("products");
 
+  // insert new row before last row
   var row = table.insertRow( table.getElementsByTagName("tr").length - 1 );
 
   var cell_ch            = row.insertCell(0);
@@ -151,12 +157,18 @@ function addRowAJAX(data) {
   var cell_carbohydrates = row.insertCell(6);
   var cell_remove        = row.insertCell(7);
 
-  cell_ch.innerHTML = "<input type='checkbox'>";
-  cell_name.innerHTML = data.name;
-  cell_weight.innerHTML = "<input type='number'>";
-  cell_calories.innerHTML = data.calories;
-  cell_proteins.innerHTML = data.proteins;
-  cell_fats.innerHTML = data.fats;
+  cell_ch.innerHTML            = "<input type='checkbox'>";
+  cell_name.innerHTML          = data.name;
+  cell_weight.innerHTML        = "<input type='number'>";
+  cell_calories.innerHTML      = data.calories;
+  cell_proteins.innerHTML      = data.proteins;
+  cell_fats.innerHTML          = data.fats;
   cell_carbohydrates.innerHTML = data.carbohydrates;
-  cell_remove.innerHTML = "<input type='button' value='Remove from DB' onclick='removeProd(this)'";
+  cell_remove.innerHTML        = "<input type='button' value='Remove from DB' onclick='removeProd(this)'";
+}
+
+// dynamicaly remove product from products table
+function removeRowAJAX(row) {
+  var table = document.getElementById("products");
+  table.deleteRow(row.rowIndex);
 }
