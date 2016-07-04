@@ -1,9 +1,9 @@
 <?php 
 
-class DB
-{
-	public function connectToDB()
-	{
+class DB {
+
+	public function connect_db() {
+
 		$servername = "127.0.0.1";
 		$dbname = "calories";
         $username = "root";
@@ -14,19 +14,16 @@ class DB
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             return $conn;
-
 		} catch(PDOException $e) {
-
             return null;
 		}
 	}
 
-    public function saveProduct($name, $calories, $proteins, $fats, $carbohydrates)
-    {
-        $conn = $this->connectToDB();
+    public function save_product( $name, $calories, $proteins, $fats, $carbohydrates ) {
 
-        if($conn !== null)
-        {
+        $conn = $this->connect_db();
+
+        if ( $conn !== null ) {
             $sql = "INSERT INTO products (name, calories, proteins, fats, carbohydrates)
             VALUES ('$name', '$calories', '$proteins', '$fats', '$carbohydrates')";
 
@@ -42,12 +39,11 @@ class DB
         }
     }
 
-    public function readAllProducts()
-    {
-        $conn = $this->connectToDB();
+    public function read_all_products() {
 
-        if($conn !== null)
-        {
+        $conn = $this->connect_db();
+
+        if ( $conn !== null ) {
             $sql = "SELECT * FROM products";
             $stat = $conn->query($sql);
 
@@ -59,7 +55,7 @@ class DB
 
     public function remove_product( $name ) {
         
-        $conn = $this->connectToDB();
+        $conn = $this->connect_db();
 
         if ( $conn !== null ) {
             $sql = "DELETE FROM products WHERE name='$name'";
@@ -75,5 +71,3 @@ class DB
         }
     }
 }
-
-?>

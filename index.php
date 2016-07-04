@@ -51,9 +51,10 @@
 		<?php
 		    require_once "db.php";
 		    $db = new DB();
-		    $prod_arr = $db->readAllProducts();
 
-		    foreach ($prod_arr as $row) {
+		    $prod_arr = $db->read_all_products();
+
+		    foreach ( $prod_arr as $row ) {
 		    	echo 
 			    "<tr>
 					<td>

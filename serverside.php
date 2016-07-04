@@ -6,7 +6,7 @@
 	
     $action = $product->action;
     
-    switch ($action) {
+    switch ( $action ) {
     	case 'save': save_prod( $product );
             break;
         case 'remove': remove_prod( $product );
@@ -21,7 +21,7 @@
 	  	$carbohydrates  = $product->carbohydrates;	
 
 	  	global $db;
-	  	echo $db->saveProduct( $name, $calories, $proteins, $fats, $carbohydrates );
+	  	echo $db->save_product( $name, $calories, $proteins, $fats, $carbohydrates );
     }
     
 	function remove_prod( $product ) {
@@ -29,4 +29,3 @@
         global $db;
         echo $db->remove_product( $name );
 	}
-?>

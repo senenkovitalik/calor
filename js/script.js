@@ -1,25 +1,23 @@
 function addProd(button) {
 
-  var table, cells, name, calories, proteins, fats, carbohydrates, data, str;
+  var cells = button.parentNode.parentNode.cells;
 
-  cells = button.parentNode.parentNode.cells;
+  var name            = cells[0].childNodes[0].value;
+  var calories        = cells[1].childNodes[0].value;
+  var proteins        = cells[2].childNodes[0].value;
+  var fats            = cells[3].childNodes[0].value;
+  var carbohydrates   = cells[4].childNodes[0].value;
 
-  name            = cells[0].childNodes[0].value;
-  calories        = cells[1].childNodes[0].value;
-  proteins        = cells[2].childNodes[0].value;
-  fats            = cells[3].childNodes[0].value;
-  carbohydrates   = cells[4].childNodes[0].value;
-
-  data = {
+  var data = {
     'action': 'save',
-  	'name' : name,
-  	'calories' : calories,
-  	'proteins' : proteins,
-  	'fats' : fats,
-  	'carbohydrates' : carbohydrates
+  	'name': name,
+  	'calories': calories,
+  	'proteins': proteins,
+  	'fats': fats,
+  	'carbohydrates': carbohydrates
   };
 
-  str = JSON.stringify(data);
+  var str = JSON.stringify(data);
   
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -39,7 +37,12 @@ function removeProd(button) {
 
   var name = button.parentNode.parentNode.cells[1].innerText;
 
-  var str = JSON.stringify( {'action':'remove', 'name':name} );
+  var obj = {
+    'action': 'remove',
+    'name': name
+  }
+
+  var str = JSON.stringify(obj);
 
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -57,10 +60,11 @@ function removeProd(button) {
 // calculate each product per 100g
 // and total calculation 
 function calculate() {
-  var table = document.getElementById("products");
+
+  var table = document.getElementById('products');
   var rows = table.rows;
 
-  var row, checkbox, name, weight, calories, proteins, fats, carbohydrates,
+  var name, weight, calories, proteins, fats, carbohydrates,
       total_weight = 0,
       total_calories = 0,
       total_proteins = 0,
@@ -68,12 +72,12 @@ function calculate() {
       total_carbohydrates = 0;
 
   for (var i = 1; i < rows.length-1; i++) {
-    row = rows[i];
-    checkbox = row.cells[0].getElementsByTagName("input")[0];
+    var row = rows[i];
+    var checkbox = row.cells[0].getElementsByTagName('input')[0];
 
     if (checkbox.checked) {
       name          = row.cells[1].innerText;
-      weight        = parseInt(row.cells[2].getElementsByTagName("input")[0].value);
+      weight        = parseInt(row.cells[2].getElementsByTagName('input')[0].value);
       calories      = parseInt(row.cells[3].innerText);
       proteins      = parseFloat(row.cells[4].innerText);
       fats          = parseFloat(row.cells[5].innerText);
@@ -108,7 +112,7 @@ function calculate() {
   var percent_carbohydrates = total_carbohydrates * percent;
 
   var data = [
-    "Сумарно", 
+    'Сумарно', 
     total_weight, 
     total_calories, 
     total_proteins, 
@@ -125,27 +129,25 @@ function calculate() {
 
 // insert new row as last row to calc-table
 function addRow(data) {
-  var table, row, cell_name, cell_weight, cell_calories, cell_protein, 
-      cell_fats, cell_carbohydrates;
   
-  table = document.getElementById("calc-table");
+  var table = document.getElementById("calc-table");
   
-  row = table.insertRow(-1);
+  var row = table.insertRow(-1);
 
   // name
-  cell_name = row.insertCell(0);
+  var cell_name = row.insertCell(0);
   cell_name.innerHTML = data[0];
 
   // weight
-  cell_weight = row.insertCell(1);
+  var cell_weight = row.insertCell(1);
   cell_weight.innerHTML = data[1];
 
   // calories
-  cell_calories = row.insertCell(2);
+  var cell_calories = row.insertCell(2);
   cell_calories.innerHTML = data[2].toFixed(2);
 
   // protein
-  cell_protein = row.insertCell(3);
+  var cell_protein = row.insertCell(3);
   if (data[6] !== undefined) {
     cell_protein.innerHTML = data[3].toFixed(2) + " ( " + data[6].toFixed(2) + "% )";
   } else {
@@ -153,7 +155,7 @@ function addRow(data) {
   }
   
   // fats
-  cell_fats = row.insertCell(4);
+  var cell_fats = row.insertCell(4);
   if (data[7] !== undefined) {
     cell_fats.innerHTML = data[4].toFixed(2) + " ( " + data[7].toFixed(2) + "% )";
   } else {
@@ -161,7 +163,7 @@ function addRow(data) {
   }
   
   // carbohydrates
-  cell_carbohydrates = row.insertCell(5);
+  var cell_carbohydrates = row.insertCell(5);
   if (data[8] !== undefined) {
     cell_carbohydrates.innerHTML = data[5].toFixed(2) + " ( " + data[8].toFixed(2) + "% ) ";
   } else {
@@ -186,14 +188,14 @@ function addRowAJAX(data) {
   var cell_carbohydrates = row.insertCell(6);
   var cell_remove        = row.insertCell(7);
 
-  cell_ch.innerHTML            = "<input type='checkbox'>";
+  cell_ch.innerHTML            = '<input type="checkbox">';
   cell_name.innerHTML          = data.name;
-  cell_weight.innerHTML        = "<input type='number'>";
+  cell_weight.innerHTML        = '<input type="number">';
   cell_calories.innerHTML      = data.calories;
   cell_proteins.innerHTML      = data.proteins;
   cell_fats.innerHTML          = data.fats;
   cell_carbohydrates.innerHTML = data.carbohydrates;
-  cell_remove.innerHTML        = "<input type='button' value='Remove from DB' onclick='removeProd(this)'>";
+  cell_remove.innerHTML        = '<input type="button" value="Remove from DB" onclick="removeProd(this)">';
 }
 
 // dynamicaly remove product from products table
