@@ -160,7 +160,6 @@ function addRow(data) {
     cell_fats.innerHTML = data[4].toFixed(2);
   }
   
-
   // carbohydrates
   cell_carbohydrates = row.insertCell(5);
   if (data[8] !== undefined) {
@@ -194,7 +193,7 @@ function addRowAJAX(data) {
   cell_proteins.innerHTML      = data.proteins;
   cell_fats.innerHTML          = data.fats;
   cell_carbohydrates.innerHTML = data.carbohydrates;
-  cell_remove.innerHTML        = "<input type='button' value='Remove from DB' onclick='removeProd(this)'";
+  cell_remove.innerHTML        = "<input type='button' value='Remove from DB' onclick='removeProd(this)'>";
 }
 
 // dynamicaly remove product from products table
