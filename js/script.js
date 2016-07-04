@@ -203,3 +203,22 @@ function removeRowAJAX(row) {
   var table = document.getElementById("products");
   table.deleteRow(row.rowIndex);
 }
+
+function checkProduct(input) {
+  var row = input.parentNode.parentNode;
+  var cell = row.cells[0];
+  var checkbox = cell.getElementsByTagName("input")[0];
+  checkbox.checked = true;
+}
+
+function uncheckProduct(input) {
+  var row = input.parentNode.parentNode;
+  var cell = row.cells[0];
+  var checkbox = cell.getElementsByTagName("input")[0];
+
+  if (input.value === "") {
+    checkbox.checked = false;
+  } else {
+    checkbox.checked = true;
+  }
+}

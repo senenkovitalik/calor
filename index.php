@@ -62,7 +62,7 @@
 					</td>
 					<td>{$row['name']}</td>
 					<td>
-						<input type=\"number\">
+						<input type=\"number\" onfocus=\"checkProduct(this);\" onblur=\"uncheckProduct(this);\">
 					</td>
 					<td>{$row['calories']}</td>
 					<td>{$row['proteins']}</td>
