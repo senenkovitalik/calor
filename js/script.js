@@ -61,6 +61,8 @@ function removeProd(button) {
 // and total calculation 
 function calculate() {
 
+  clearCalcTable();
+
   var table = document.getElementById('products');
   var rows = table.rows;
 
@@ -220,5 +222,14 @@ function uncheckProduct(input) {
     checkbox.checked = false;
   } else {
     checkbox.checked = true;
+  }
+}
+
+function clearCalcTable() {
+  var table = document.getElementById("calc-table");
+  var rows = table.rows;
+  
+  for (var i = rows.length-1; i > 0; i--) {
+    table.deleteRow(rows[i].rowIndex);
   }
 }
