@@ -56,18 +56,18 @@
 
 		    foreach ( $prod_arr as $row ) {
 		    	echo 
-			    "<tr>
+			    "<tr data-product-name=\"{$row['name']}\">
 					<td>
 						<input type=\"checkbox\">
 					</td>
-					<td>{$row['name']}</td>
+					<td data-value-type=\"name\" onclick=\"changeProductValue(this);\">{$row['name']}</td>
 					<td>
 						<input type=\"number\" onfocus=\"checkProduct(this);\" onblur=\"uncheckProduct(this);\">
 					</td>
-					<td>{$row['calories']}</td>
-					<td>{$row['proteins']}</td>
-					<td>{$row['fats']}</td>
-					<td>{$row['carbohydrates']}</td>
+					<td data-value-type=\"calories\" onclick=\"changeProductValue(this);\">{$row['calories']}</td>
+					<td data-value-type=\"proteins\" onclick=\"changeProductValue(this);\">{$row['proteins']}</td>
+					<td data-value-type=\"fats\" onclick=\"changeProductValue(this);\">{$row['fats']}</td>
+					<td data-value-type=\"carbohydrates\" onclick=\"changeProductValue(this);\">{$row['carbohydrates']}</td>
 					<td>
 						<input type=\"button\" value=\"Remove from DB\" onclick=\"removeProd(this);\">
 					</td>

@@ -70,4 +70,22 @@ class DB {
             return false;   // Some problems
         }
     }
+
+    public function update_product( $value, $value_type, $name ) {
+
+        $conn = $this->connect_db();
+
+        if ( $conn !== null ) {
+            $sql = "UPDATE products SET ".$value_type."='$value' WHERE name='$name'";
+            $stat = $conn->query($sql);
+
+            $conn = null;
+        }
+
+        if ( $status !== 0 ) {
+            return true;    // updated succesfuly
+        } else {
+            return false;   // some problems
+        }
+    }
 }

@@ -11,6 +11,8 @@
             break;
         case 'remove': remove_prod( $product );
             break;
+        case 'update': update_prod( $product );
+            break;
     }
 
     function save_prod( $product ) {
@@ -29,3 +31,13 @@
         global $db;
         echo $db->remove_product( $name );
 	}
+
+    function update_prod( $product ) {
+        $value = $product->value;
+        $value_type = $product->value_type;
+        $name = $product->name;
+
+        global $db;
+
+        echo $db->update_product( $value, $value_type, $name );
+    }

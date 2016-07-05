@@ -233,3 +233,60 @@ function clearCalcTable() {
     table.deleteRow(rows[i].rowIndex);
   }
 }
+
+// click on value and start to change it
+function changeProductValue(td) {
+
+  var text = td.innerText;
+
+  var input = document.createElement("input");
+  input.id = "name";
+  input.type = "text";
+  input.value = text;
+
+  input.addEventListener("click", function(e) {
+    // prevent event propagation to td
+    if (e.stopPropagation) e.stopPropagation();
+  });
+
+  input.addEventListener("blur", function(e) {
+    var value = e.target.value;
+    var valueType = td.getAttribute("data-value-type");
+    var name = td.parentNode.getAttribute("data-product-name");
+
+    td.innerHTML = value;
+
+    updateProduct(value, valueType, name);
+  });
+
+  td.innerText = "";
+  td.appendChild(input);
+
+  input.focus();
+}
+
+function updateProduct(value, valueType, name) {
+  console.log(value, valueType, name);
+
+  var data = {
+    'action': 'update',
+    'name': name,
+    'value': value,
+    'value_type': valueType,
+  };
+
+  var str = JSON.stringify(data);
+  
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+      // response
+      if (xhttp.responseText) {
+        // insert new row
+        console.log(xhttp.response);
+      }
+    }
+  };
+  xhttp.open("GET", "serverside.php?q=" + str, true);
+  xhttp.send();
+}
