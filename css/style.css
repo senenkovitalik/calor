@@ -39,3 +39,7 @@ input[type="number"] {
 #calc-td {
     text-align: center;
 }
+
+.arrow:hover {
+    border: 1px dotted red;
+}

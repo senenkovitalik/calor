@@ -38,12 +38,32 @@
 	<table id="products">
 		<tr>
 		    <th></th>
-			<th>Назва</th>
+			<th data-col-name="name">
+			    Назва
+			    <img class="arrow" src="img/arrow_up.png" onclick="sortColumn(this, 'DESC');">
+			    <img class="arrow" src="img/arrow_down.png" onclick="sortColumn(this, 'ASC');">
+			</th>
 			<th>Вага, г</th>
-			<th>Калорійність, ккал</th>
-			<th>Білки, г</th>
-			<th>Жири, г</th>
-			<th>Вуглеводи, г</th>
+			<th data-col-name="calories">
+			    Калорійність, ккал
+			    <img class="arrow" src="img/arrow_up.png" onclick="sortColumn(this, 'DESC');">
+			    <img class="arrow" src="img/arrow_down.png" onclick="sortColumn(this, 'ASC');">
+			</th>
+			<th data-col-name="proteins">
+			    Білки, г
+			    <img class="arrow" src="img/arrow_up.png" onclick="sortColumn(this, 'DESC');">
+			    <img class="arrow" src="img/arrow_down.png" onclick="sortColumn(this, 'ASC');">
+			</th>
+			<th data-col-name="fats">
+			    Жири, г
+			    <img class="arrow" src="img/arrow_up.png" onclick="sortColumn(this, 'DESC');">
+			    <img class="arrow" src="img/arrow_down.png" onclick="sortColumn(this, 'ASC');">
+			</th>
+			<th data-col-name="carbohydrates">
+			    Вуглеводи, г
+			    <img class="arrow" src="img/arrow_up.png" onclick="sortColumn(this, 'DESC');">
+			    <img class="arrow" src="img/arrow_down.png" onclick="sortColumn(this, 'ASC');">
+			</th>
 			<th></th>
 		</tr>
 

@@ -180,6 +180,8 @@ function addRowAJAX(data) {
 
   // insert new row before last row
   var row = table.insertRow( table.getElementsByTagName("tr").length - 1 );
+  row.setAttribute("data-product-name", data.name);
+
 
   var cell_ch            = row.insertCell(0);
   var cell_name          = row.insertCell(1);
@@ -190,14 +192,30 @@ function addRowAJAX(data) {
   var cell_carbohydrates = row.insertCell(6);
   var cell_remove        = row.insertCell(7);
 
-  cell_ch.innerHTML            = '<input type="checkbox">';
-  cell_name.innerHTML          = data.name;
-  cell_weight.innerHTML        = '<input type="number">';
-  cell_calories.innerHTML      = data.calories;
-  cell_proteins.innerHTML      = data.proteins;
-  cell_fats.innerHTML          = data.fats;
+  cell_ch.innerHTML = '<input type="checkbox">';
+
+  cell_name.setAttribute("data-value-type", data.name);
+  cell_name.innerHTML = data.name;
+
+  cell_weight.innerHTML = '<input type="number" onfocus="checkProduct(this);" onblur="uncheckProduct(this);">';
+
+  cell_calories.setAttribute("data-value-type", "calories");
+  cell_calories.setAttribute("onclick", "changeProductValue(this)");
+  cell_calories.innerHTML = data.calories;
+  
+  cell_proteins.setAttribute("data-value-type", "proteins");
+  cell_proteins.setAttribute("onclick", "changeProductValue(this)");
+  cell_proteins.innerHTML = data.proteins;
+
+  cell_fats.setAttribute("data-value-type", "fats");
+  cell_fats.setAttribute("onclick", "changeProductValue(this)");
+  cell_fats.innerHTML = data.fats;
+
+  cell_carbohydrates.setAttribute("data-value-type", "carbohydrates");
+  cell_carbohydrates.setAttribute("onclick", "changeProductValue(this)");
   cell_carbohydrates.innerHTML = data.carbohydrates;
-  cell_remove.innerHTML        = '<input type="button" value="Remove from DB" onclick="removeProd(this)">';
+
+  cell_remove.innerHTML = '<input type="button" value="Remove from DB" onclick="removeProd(this)">';
 }
 
 // dynamicaly remove product from products table
@@ -222,6 +240,15 @@ function uncheckProduct(input) {
     checkbox.checked = false;
   } else {
     checkbox.checked = true;
+  }
+}
+
+function clearProdTable() {
+  var table = document.getElementById("products");
+  var rows = table.rows;
+  
+  for (var i = rows.length-2; i > 0; i--) {
+    table.deleteRow(rows[i].rowIndex);
   }
 }
 
@@ -266,7 +293,6 @@ function changeProductValue(td) {
 }
 
 function updateProduct(value, valueType, name) {
-  console.log(value, valueType, name);
 
   var data = {
     'action': 'update',
@@ -284,6 +310,35 @@ function updateProduct(value, valueType, name) {
       if (xhttp.responseText) {
         // insert new row
         console.log(xhttp.response);
+      }
+    }
+  };
+  xhttp.open("GET", "serverside.php?q=" + str, true);
+  xhttp.send();
+}
+
+function sortColumn(column, order) {
+  var col = column.parentNode.getAttribute("data-col-name");
+
+  var data = {
+    'action': 'sort',
+    'column': col,
+    'order': order
+  };
+
+  var str = JSON.stringify(data);
+  
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+      if (xhttp.responseText) {
+
+        clearProdTable();
+        
+        var sortedProducts = JSON.parse(xhttp.responseText);
+        sortedProducts.forEach(function(item) {
+          addRowAJAX(item);
+        });
       }
     }
   };

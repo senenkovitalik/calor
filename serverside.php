@@ -13,6 +13,8 @@
             break;
         case 'update': update_prod( $product );
             break;
+        case 'sort': sort_prod( $product );
+            break; 
     }
 
     function save_prod( $product ) {
@@ -40,4 +42,21 @@
         global $db;
 
         echo $db->update_product( $value, $value_type, $name );
+    }
+
+    function sort_prod( $product ) {
+        $column = $product->column;
+        $order = $product->order;
+
+        global $db;
+
+        $prod = $db->sort_product( $column, $order );
+        
+        $prod_arr = array();
+
+        foreach ($prod as $p) {
+            array_push( $prod_arr, $p );
+        }
+
+        echo json_encode( $prod_arr );
     }

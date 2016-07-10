@@ -88,4 +88,19 @@ class DB {
             return false;   // some problems
         }
     }
+
+    public function sort_product( $column, $order ) {
+
+        $conn = $this->connect_db();
+
+        if ( $conn !== null ) {
+
+            $sql = "SELECT * FROM products ORDER BY products.$column $order";
+            $stat = $conn->query($sql);
+
+            $conn = null;
+        }
+
+        return $stat;
+    }
 }
