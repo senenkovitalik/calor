@@ -71,12 +71,12 @@ class DB {
         }
     }
 
-    public function update_product( $value, $value_type, $name ) {
+    public function update_product( $value, $value_type, $product ) {
 
         $conn = $this->connect_db();
 
         if ( $conn !== null ) {
-            $sql = "UPDATE products SET ".$value_type."='$value' WHERE name='$name'";
+            $sql = "UPDATE products SET ".$value_type."='$value' WHERE name='$product'";
             $stat = $conn->query($sql);
 
             $conn = null;

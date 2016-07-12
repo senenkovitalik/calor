@@ -37,11 +37,11 @@
     function update_prod( $product ) {
         $value = $product->value;
         $value_type = $product->value_type;
-        $name = $product->name;
+        $prod = $product->product;
 
         global $db;
 
-        echo $db->update_product( $value, $value_type, $name );
+        echo $db->update_product( $value, $value_type, $prod );
     }
 
     function sort_prod( $product ) {

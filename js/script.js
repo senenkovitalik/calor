@@ -194,7 +194,8 @@ function addRowAJAX(data) {
 
   cell_ch.innerHTML = '<input type="checkbox">';
 
-  cell_name.setAttribute("data-value-type", data.name);
+  cell_name.setAttribute("data-value-type", "name");
+  cell_name.setAttribute("onclick", "changeProductValue(this)");
   cell_name.innerHTML = data.name;
 
   cell_weight.innerHTML = '<input type="number" onfocus="checkProduct(this);" onblur="uncheckProduct(this);">';
@@ -296,7 +297,7 @@ function updateProduct(value, valueType, name) {
 
   var data = {
     'action': 'update',
-    'name': name,
+    'product': name,
     'value': value,
     'value_type': valueType,
   };
