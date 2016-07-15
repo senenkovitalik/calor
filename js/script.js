@@ -16,7 +16,7 @@ function addProd(button) {
   	'fats': fats,
   	'carbohydrates': carbohydrates
   };
-
+  
   var str = JSON.stringify(data);
   
   var xhttp = new XMLHttpRequest();
@@ -127,6 +127,7 @@ function calculate() {
 
   // insert row with total values
   addRow(data);
+  addAdvice(data);
 }
 
 // insert new row as last row to calc-table
@@ -345,4 +346,44 @@ function sortColumn(column, order) {
   };
   xhttp.open("GET", "serverside.php?q=" + str, true);
   xhttp.send();
+}
+
+function addAdvice(data) {
+  
+  var text = document.getElementById("advice").firstElementChild;
+
+  var p = data[6];
+  var f = data[7];
+  var c = data[8];
+
+  // protein 30-35
+  // fat 10-20
+  // carbohydrates 50-60
+  var pt, ft, ct;
+
+  if (p >= 30 && p <= 35) {
+    pt = "норма";
+  } else if (p < 30) {
+    pt = "+" + (30 - p).toFixed(2) + "%";
+  } else {
+    pt = "-" + (p - 35).toFixed(2) + "%";
+  }
+
+  if (f >= 10 && f <= 20) {
+    ft = "норма";
+  } else if (f < 10) {
+    ft = "+" + (10 - f).toFixed(2) + "%";
+  } else {
+    ft = "-" + (f - 20).toFixed(2) + "%";
+  }
+
+  if (c >= 50 && c <= 60) {
+    ct = "норма";
+  } else if (c < 50) {
+    ct = "+" + (50 - c).toFixed(2) + "%";
+  } else {
+    ct = "-" + (c - 60).toFixed(2) + "%";
+  }
+
+  text.innerHTML = "Норма: білки - 30-35%, жири - 10-20%, вуглеводи - 50-60%<br>Білки: " + pt + ". Жири: " + ft + ". Вуглеводи: " + ct;
 }

@@ -114,6 +114,9 @@
 			<th>Вуглеводи, г</th>
 		</tr>
 	</table>
+	<div id="advice">
+		<p></p>
+	</div>
 </div>
 
 </body>
